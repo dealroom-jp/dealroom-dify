@@ -1,0 +1,379 @@
+{
+    "id": "91b1c040-0c3a-4f4e-80e8-bed422dfb632",
+    "tenant_id": "34e8de09-23d7-489a-ab7c-63b17bbe9f26",
+    "app_id": "dd458756-411a-488e-91b9-f8d83997a5c3",
+    "workflow_type": <WorkflowType.WORKFLOW: "workflow">,
+    "workflow_id": "9ba92523-fd74-45c7-a6ba-536ceb5ceb28",
+    "graph_config": {
+        "nodes": [
+            {
+                "id": "1735618439679",
+                "type": "custom",
+                "data": {
+                    "type": "start",
+                    "title": "開始",
+                    "desc": "",
+                    "variables": [
+                        {
+                            "variable": "question",
+                            "label": "question",
+                            "type": "text-input",
+                            "max_length": 48,
+                            "required": True,
+                            "options": []
+                        },
+                        {
+                            "variable": "knowledge_id",
+                            "label": "knowledge_id",
+                            "type": "text-input",
+                            "max_length": 48,
+                            "required": True,
+                            "options": []
+                        }
+                    ],
+                    "selected": False
+                },
+                "position": {
+                    "x": 80,
+                    "y": 282
+                },
+                "targetPosition": "left",
+                "sourcePosition": "right",
+                "positionAbsolute": {
+                    "x": 80,
+                    "y": 282
+                },
+                "width": 244,
+                "height": 115,
+                "selected": False
+            },
+            {
+                "id": "1735618920362",
+                "type": "custom",
+                "data": {
+                    "type": "knowledge-retrieval",
+                    "title": "知識取得",
+                    "desc": "",
+                    "query_variable_selector": [
+                        "1735618439679",
+                        "question"
+                    ],
+                    "dataset_ids": [],
+                    "retrieval_mode": "multiple",
+                    "variables": [
+                        {
+                            "variable": "knowledgeId",
+                            "value_selector": [
+                                "1735618439679",
+                                "knowledge_id"
+                            ]
+                        }
+                    ],
+                    "multiple_retrieval_config": {
+                        "top_k": 4,
+                        "reranking_mode": "reranking_model",
+                        "reranking_enable": False
+                    },
+                    "selected": False
+                },
+                "position": {
+                    "x": 381.20000000000005,
+                    "y": 282
+                },
+                "targetPosition": "left",
+                "sourcePosition": "right",
+                "positionAbsolute": {
+                    "x": 381.20000000000005,
+                    "y": 282
+                },
+                "width": 244,
+                "height": 53,
+                "selected": True
+            },
+            {
+                "id": "1735619006310",
+                "type": "custom",
+                "data": {
+                    "type": "end",
+                    "title": "終了",
+                    "desc": "",
+                    "outputs": [],
+                    "selected": False
+                },
+                "position": {
+                    "x": 688,
+                    "y": 282
+                },
+                "targetPosition": "left",
+                "sourcePosition": "right",
+                "positionAbsolute": {
+                    "x": 688,
+                    "y": 282
+                },
+                "width": 244,
+                "height": 53,
+                "selected": False
+            }
+        ],
+        "edges": [
+            {
+                "id": "1735618439679-source-1735618920362-target",
+                "type": "custom",
+                "source": "1735618439679",
+                "sourceHandle": "source",
+                "target": "1735618920362",
+                "targetHandle": "target",
+                "data": {
+                    "sourceType": "start",
+                    "targetType": "knowledge-retrieval",
+                    "isInIteration": False
+                },
+                "zIndex": 0
+            },
+            {
+                "id": "1735618920362-source-1735619006310-target",
+                "type": "custom",
+                "source": "1735618920362",
+                "sourceHandle": "source",
+                "target": "1735619006310",
+                "targetHandle": "target",
+                "data": {
+                    "sourceType": "knowledge-retrieval",
+                    "targetType": "end",
+                    "isInIteration": False
+                },
+                "zIndex": 0
+            }
+        ],
+        "viewport": {
+            "x": -325.5,
+            "y": 205,
+            "zoom": 1
+        }
+    },
+    "user_id": "aa9d8934-74e5-4275-b174-02e60308b829",
+    "user_from": <UserFrom.ACCOUNT: "account">,
+    "invoke_from": <InvokeFrom.DEBUGGER: "debugger">,
+    "workflow_call_depth": 0,
+    "graph": Graph(root_node_id="1735618439679", node_ids=[
+        "1735618439679",
+        "1735618920362",
+        "1735619006310"
+    ], node_id_config_mapping={
+        "1735618439679": {
+            "id": "1735618439679",
+            "type": "custom",
+            "data": {
+                "type": "start",
+                "title": "開始",
+                "desc": "",
+                "variables": [
+                    {
+                        "variable": "question",
+                        "label": "question",
+                        "type": "text-input",
+                        "max_length": 48,
+                        "required": True,
+                        "options": []
+                    },
+                    {
+                        "variable": "knowledge_id",
+                        "label": "knowledge_id",
+                        "type": "text-input",
+                        "max_length": 48,
+                        "required": True,
+                        "options": []
+                    }
+                ],
+                "selected": False
+            },
+            "position": {
+                "x": 80,
+                "y": 282
+            },
+            "targetPosition": "left",
+            "sourcePosition": "right",
+            "positionAbsolute": {
+                "x": 80,
+                "y": 282
+            },
+            "width": 244,
+            "height": 115,
+            "selected": False
+        },
+        "1735618920362": {
+            "id": "1735618920362",
+            "type": "custom",
+            "data": {
+                "type": "knowledge-retrieval",
+                "title": "知識取得",
+                "desc": "",
+                "query_variable_selector": [
+                    "1735618439679",
+                    "question"
+                ],
+                "dataset_ids": [],
+                "retrieval_mode": "multiple",
+                "variables": [
+                    {
+                        "variable": "knowledgeId",
+                        "value_selector": [
+                            "1735618439679",
+                            "knowledge_id"
+                        ]
+                    }
+                ],
+                "multiple_retrieval_config": {
+                    "top_k": 4,
+                    "reranking_mode": "reranking_model",
+                    "reranking_enable": False
+                },
+                "selected": False
+            },
+            "position": {
+                "x": 381.20000000000005,
+                "y": 282
+            },
+            "targetPosition": "left",
+            "sourcePosition": "right",
+            "positionAbsolute": {
+                "x": 381.20000000000005,
+                "y": 282
+            },
+            "width": 244,
+            "height": 53,
+            "selected": True
+        },
+        "1735619006310": {
+            "id": "1735619006310",
+            "type": "custom",
+            "data": {
+                "type": "end",
+                "title": "終了",
+                "desc": "",
+                "outputs": [],
+                "selected": False
+            },
+            "position": {
+                "x": 688,
+                "y": 282
+            },
+            "targetPosition": "left",
+            "sourcePosition": "right",
+            "positionAbsolute": {
+                "x": 688,
+                "y": 282
+            },
+            "width": 244,
+            "height": 53,
+            "selected": False
+        }
+    }, edge_mapping={
+        "1735618439679": [GraphEdge(source_node_id="1735618439679", target_node_id="1735618920362", run_condition=None)
+        ],
+        "1735618920362": [GraphEdge(source_node_id="1735618920362", target_node_id="1735619006310", run_condition=None)
+        ]
+    }, reverse_edge_mapping={
+        "1735618920362": [GraphEdge(source_node_id="1735618439679", target_node_id="1735618920362", run_condition=None)
+        ],
+        "1735619006310": [GraphEdge(source_node_id="1735618920362", target_node_id="1735619006310", run_condition=None)
+        ]
+    }, parallel_mapping={}, node_parallel_mapping={}, answer_stream_generate_routes=AnswerStreamGenerateRoute(answer_dependencies={}, answer_generate_route={}), end_stream_param=EndStreamParam(end_dependencies={
+        "1735619006310": []
+    }, end_stream_variable_selector_mapping={
+        "1735619006310": []
+    })),
+    "graph_runtime_state": GraphRuntimeState(variable_pool=VariablePool(variable_dictionary=defaultdict(<class "dict">,
+    {
+        "sys": {
+            3368061839773072078: ArrayAnyVariable(value_type=<SegmentType.ARRAY_ANY: "array[any]">, value=[], id="43ee145b-33f9-44d8-ab12-8e9bb7bfa499", name="files", description="", selector=("sys",
+            "files")),
+            7046751166130065136: StringVariable(value_type=<SegmentType.STRING: "string">, value="aa9d8934-74e5-4275-b174-02e60308b829", id="ebc0b140-7010-4ba4-9b49-2128dbaa13d3", name="user_id", description="", selector=("sys",
+            "user_id")),
+            -8438532654297147377: StringVariable(value_type=<SegmentType.STRING: "string">, value="dd458756-411a-488e-91b9-f8d83997a5c3", id="50fec66c-cbf1-4866-97e7-17bec688de62", name="app_id", description="", selector=("sys",
+            "app_id")),
+            -3256042666605140303: StringVariable(value_type=<SegmentType.STRING: "string">, value="9ba92523-fd74-45c7-a6ba-536ceb5ceb28", id="574e0791-42b0-41fe-8d17-930f727b4f61", name="workflow_id", description="", selector=("sys",
+            "workflow_id")),
+            -7854627076438971158: StringVariable(value_type=<SegmentType.STRING: "string">, value="85f88dec-320f-49df-a014-2d7c5eac34b8", id="5fb32059-43aa-4027-8dd4-251899af48bc", name="workflow_run_id", description="", selector=("sys",
+            "workflow_run_id"))
+        },
+        "1735618439679": {
+            -3383033328002578976: StringVariable(value_type=<SegmentType.STRING: "string">, value="tao", id="fa4e17dd-10fd-47d7-9cfb-f6c991bbea29", name="question", description="", selector=[
+                "1735618439679",
+                "question"
+            ]),
+            -1684646990346921116: StringVariable(value_type=<SegmentType.STRING: "string">, value="a869848d-cab8-4a8e-868a-74ca2f456e08", id="917823ca-0852-4526-9130-628eaab82ff0", name="knowledge_id", description="", selector=[
+                "1735618439679",
+                "knowledge_id"
+            ]),
+            -2606329212805927610: ArrayAnyVariable(value_type=<SegmentType.ARRAY_ANY: "array[any]">, value=[], id="9ec65e53-1e1e-4025-a5d1-aa09d3fea529", name="sys.files", description="", selector=[
+                "1735618439679",
+                "sys.files"
+            ]),
+            8977033896236711213: StringVariable(value_type=<SegmentType.STRING: "string">, value="aa9d8934-74e5-4275-b174-02e60308b829", id="8a17c3d9-ff06-4170-b64d-0af3066203fe", name="sys.user_id", description="", selector=[
+                "1735618439679",
+                "sys.user_id"
+            ]),
+            1974053977532316413: StringVariable(value_type=<SegmentType.STRING: "string">, value="dd458756-411a-488e-91b9-f8d83997a5c3", id="0ff6c68e-5e94-44c3-be9a-b005ec3675d8", name="sys.app_id", description="", selector=[
+                "1735618439679",
+                "sys.app_id"
+            ]),
+            5739647917899044988: StringVariable(value_type=<SegmentType.STRING: "string">, value="9ba92523-fd74-45c7-a6ba-536ceb5ceb28", id="9f0a25a6-9c84-4d81-9bb9-a3ead6b69b27", name="sys.workflow_id", description="", selector=[
+                "1735618439679",
+                "sys.workflow_id"
+            ]),
+            -5625182402405524950: StringVariable(value_type=<SegmentType.STRING: "string">, value="85f88dec-320f-49df-a014-2d7c5eac34b8", id="24eb9508-eea2-4163-b68e-4c9f417a53d5", name="sys.workflow_run_id", description="", selector=[
+                "1735618439679",
+                "sys.workflow_run_id"
+            ])
+        }
+    }), user_inputs={
+        "question": "tao",
+        "knowledge_id": "a869848d-cab8-4a8e-868a-74ca2f456e08"
+    }, system_variables={<SystemVariableKey.FILES: "files">: [], <SystemVariableKey.USER_ID: "user_id">: "aa9d8934-74e5-4275-b174-02e60308b829", <SystemVariableKey.APP_ID: "app_id">: "dd458756-411a-488e-91b9-f8d83997a5c3", <SystemVariableKey.WORKFLOW_ID: "workflow_id">: "9ba92523-fd74-45c7-a6ba-536ceb5ceb28", <SystemVariableKey.WORKFLOW_RUN_ID: "workflow_run_id">: "85f88dec-320f-49df-a014-2d7c5eac34b8"
+    }, environment_variables=[], conversation_variables=[]), start_at=76118.361548208, total_tokens=0, llm_usage=LLMUsage(prompt_tokens=0, prompt_unit_price=Decimal("0.0"), prompt_price_unit=Decimal("0.0"), prompt_price=Decimal("0.0"), completion_tokens=0, completion_unit_price=Decimal("0.0"), completion_price_unit=Decimal("0.0"), completion_price=Decimal("0.0"), total_tokens=0, total_price=Decimal("0.0"), currency="USD", latency=0.0), outputs={}, node_run_steps=2, node_run_state=RuntimeRouteState(routes={}, node_state_mapping={
+        "dd9464b1-47ff-422e-8d27-9591c963a617": RouteNodeState(id="dd9464b1-47ff-422e-8d27-9591c963a617", node_id="1735618439679", node_run_result=NodeRunResult(status=<WorkflowNodeExecutionStatus.SUCCEEDED: "succeeded">, inputs={
+            "question": "tao",
+            "knowledge_id": "a869848d-cab8-4a8e-868a-74ca2f456e08",
+            "sys.files": [],
+            "sys.user_id": "aa9d8934-74e5-4275-b174-02e60308b829",
+            "sys.app_id": "dd458756-411a-488e-91b9-f8d83997a5c3",
+            "sys.workflow_id": "9ba92523-fd74-45c7-a6ba-536ceb5ceb28",
+            "sys.workflow_run_id": "85f88dec-320f-49df-a014-2d7c5eac34b8"
+        }, process_data=None, outputs={
+            "question": "tao",
+            "knowledge_id": "a869848d-cab8-4a8e-868a-74ca2f456e08",
+            "sys.files": [],
+            "sys.user_id": "aa9d8934-74e5-4275-b174-02e60308b829",
+            "sys.app_id": "dd458756-411a-488e-91b9-f8d83997a5c3",
+            "sys.workflow_id": "9ba92523-fd74-45c7-a6ba-536ceb5ceb28",
+            "sys.workflow_run_id": "85f88dec-320f-49df-a014-2d7c5eac34b8"
+        }, metadata={}, llm_usage=None, edge_source_handle=None, error=None, error_type=None, retry_index=0), status=<Status.SUCCESS: "success">, start_at=datetime.datetime(2024,
+        12,
+        31,
+        15,
+        32,
+        49,
+        707649), paused_at=None, finished_at=datetime.datetime(2024,
+        12,
+        31,
+        15,
+        32,
+        49,
+        710597), failed_reason=None, paused_by=None, index=1),
+        "91b1c040-0c3a-4f4e-80e8-bed422dfb632": RouteNodeState(id="91b1c040-0c3a-4f4e-80e8-bed422dfb632", node_id="1735618920362", node_run_result=None, status=<Status.RUNNING: "running">, start_at=datetime.datetime(2024,
+        12,
+        31,
+        15,
+        32,
+        49,
+        711215), paused_at=None, finished_at=None, failed_reason=None, paused_by=None, index=2)
+    })),
+    "previous_node_id": "1735618439679",
+    "thread_pool_id": "aac71684-b671-4079-8603-7fd1aa572cb1",
+    "node_id": "1735618920362",
+    "node_data": KnowledgeRetrievalNodeData(title="知識取得", desc="", error_strategy=None, default_value=None, version="1", retry_config=RetryConfig(max_retries=0, retry_interval=0, retry_enabled=False), type="knowledge-retrieval", query_variable_selector=[
+        "1735618439679",
+        "question"
+    ], dataset_ids=[], retrieval_mode="multiple", multiple_retrieval_config=MultipleRetrievalConfig(top_k=4, score_threshold=None, reranking_mode="reranking_model", reranking_enable=False, reranking_model=None, weights=None), single_retrieval_config=None)
+}
