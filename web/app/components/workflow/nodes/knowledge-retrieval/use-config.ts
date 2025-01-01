@@ -34,7 +34,6 @@ const useConfig = (id: string, payload: KnowledgeRetrievalNodeType) => {
   const startNode = getBeforeNodesInSameBranch(id).find(node => node.data.type === BlockEnum.Start)
   const startNodeId = startNode?.id
   const { inputs, setInputs: doSetInputs } = useNodeCrud<KnowledgeRetrievalNodeType>(id, payload)
-  const [variableIds, setVariableIds] = useState<string[]>([]);
 
   const { handleVarListChange, handleAddVariable } = useVarList<KnowledgeRetrievalNodeType>({
     inputs,
@@ -170,71 +169,6 @@ const useConfig = (id: string, payload: KnowledgeRetrievalNodeType) => {
     });
     setInputs(newInput);
   }, [currentProvider?.provider, currentModel, rerankDefaultModel]);
-
-  const UpdateVariables = () => {
-    if (!inputs.variables) {
-      setInputs({
-        ...inputs,
-        variables: [],
-      });
-    } else {
-      const addedIds: string[] = [];
-      const removedIds: string[] = [];
-
-      const updatedDatasetIds = [...inputs.dataset_ids];
-
-      inputs.variables.forEach((v) => {
-        if (v.value && !variableIds.includes(v.value)) {
-          addedIds.push(v.value);
-        }
-      });
-
-      variableIds.forEach((v) => {
-        if (!inputs.variables.map((iv) => iv.value).filter(Boolean).includes(v)) {
-          removedIds.push(v);
-        }
-      });
-
-      removedIds.forEach((ri) => {
-        const index = updatedDatasetIds.indexOf(ri);
-        if (index !== -1) {
-          updatedDatasetIds.splice(index, 1);
-        }
-      });
-
-      addedIds.forEach((ai) => {
-        if (!updatedDatasetIds.includes(ai)) {
-          updatedDatasetIds.push(ai);
-        }
-      });
-
-      if (!isEqual(inputs.dataset_ids, updatedDatasetIds)) {
-        doSetInputs({
-          ...inputs,
-          dataset_ids: updatedDatasetIds,
-        });
-      }
-
-      // `variableIds` の更新
-      const newVariableIds = inputs.variables.map((iv) => iv.value!).filter(Boolean);
-      if (!isEqual(variableIds, newVariableIds)) {
-        setVariableIds(newVariableIds);
-      }
-    }
-  }
-
-  // useEffect(() => {
-  //   console.log(inputs)
-  // }, []);
-
-  useEffect(() => {
-    UpdateVariables()
-  }, []);
-
-  useEffect(() => {
-    UpdateVariables()
-  }, [inputs.variables, doSetInputs, variableIds]);
-
 
   const [selectedDatasets, setSelectedDatasets] = useState<DataSet[]>([])
   const [rerankModelOpen, setRerankModelOpen] = useState(false)
