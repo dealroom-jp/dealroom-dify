@@ -36,7 +36,8 @@ class ModelInstance:
         self.provider_model_bundle = provider_model_bundle
         self.model = model
         self.provider = provider_model_bundle.configuration.provider.provider
-        self.credentials = self._fetch_credentials_from_bundle(provider_model_bundle, model)
+        self.credentials = self._fetch_credentials_from_bundle(
+            provider_model_bundle, model)
         self.model_type_instance = self.provider_model_bundle.model_type_instance
         self.load_balancing_manager = self._get_load_balancing_manager(
             configuration=provider_model_bundle.configuration,
@@ -55,10 +56,12 @@ class ModelInstance:
         """
         configuration = provider_model_bundle.configuration
         model_type = provider_model_bundle.model_type_instance.model_type
-        credentials = configuration.get_current_credentials(model_type=model_type, model=model)
+        credentials = configuration.get_current_credentials(
+            model_type=model_type, model=model)
 
         if credentials is None:
-            raise ProviderTokenNotInitError(f"Model {model} credentials is not initialized.")
+            raise ProviderTokenNotInitError(
+                f"Model {model} credentials is not initialized.")
 
         return credentials
 
@@ -123,7 +126,8 @@ class ModelInstance:
         if not isinstance(self.model_type_instance, LargeLanguageModel):
             raise Exception("Model type instance is not LargeLanguageModel")
 
-        self.model_type_instance = cast(LargeLanguageModel, self.model_type_instance)
+        self.model_type_instance = cast(
+            LargeLanguageModel, self.model_type_instance)
         return cast(
             Union[LLMResult, Generator],
             self._round_robin_invoke(
@@ -153,7 +157,8 @@ class ModelInstance:
         if not isinstance(self.model_type_instance, LargeLanguageModel):
             raise Exception("Model type instance is not LargeLanguageModel")
 
-        self.model_type_instance = cast(LargeLanguageModel, self.model_type_instance)
+        self.model_type_instance = cast(
+            LargeLanguageModel, self.model_type_instance)
         return cast(
             int,
             self._round_robin_invoke(
@@ -179,7 +184,8 @@ class ModelInstance:
         if not isinstance(self.model_type_instance, TextEmbeddingModel):
             raise Exception("Model type instance is not TextEmbeddingModel")
 
-        self.model_type_instance = cast(TextEmbeddingModel, self.model_type_instance)
+        self.model_type_instance = cast(
+            TextEmbeddingModel, self.model_type_instance)
         return cast(
             TextEmbeddingResult,
             self._round_robin_invoke(
@@ -202,7 +208,8 @@ class ModelInstance:
         if not isinstance(self.model_type_instance, TextEmbeddingModel):
             raise Exception("Model type instance is not TextEmbeddingModel")
 
-        self.model_type_instance = cast(TextEmbeddingModel, self.model_type_instance)
+        self.model_type_instance = cast(
+            TextEmbeddingModel, self.model_type_instance)
         return cast(
             int,
             self._round_robin_invoke(
@@ -260,7 +267,8 @@ class ModelInstance:
         if not isinstance(self.model_type_instance, ModerationModel):
             raise Exception("Model type instance is not ModerationModel")
 
-        self.model_type_instance = cast(ModerationModel, self.model_type_instance)
+        self.model_type_instance = cast(
+            ModerationModel, self.model_type_instance)
         return cast(
             bool,
             self._round_robin_invoke(
@@ -283,7 +291,8 @@ class ModelInstance:
         if not isinstance(self.model_type_instance, Speech2TextModel):
             raise Exception("Model type instance is not Speech2TextModel")
 
-        self.model_type_instance = cast(Speech2TextModel, self.model_type_instance)
+        self.model_type_instance = cast(
+            Speech2TextModel, self.model_type_instance)
         return cast(
             str,
             self._round_robin_invoke(
@@ -333,12 +342,14 @@ class ModelInstance:
         if not self.load_balancing_manager:
             return function(*args, **kwargs)
 
-        last_exception: Union[InvokeRateLimitError, InvokeAuthorizationError, InvokeConnectionError, None] = None
+        last_exception: Union[InvokeRateLimitError,
+                              InvokeAuthorizationError, InvokeConnectionError, None] = None
         while True:
             lb_config = self.load_balancing_manager.fetch_next()
             if not lb_config:
                 if not last_exception:
-                    raise ProviderTokenNotInitError("Model credentials is not initialized.")
+                    raise ProviderTokenNotInitError(
+                        "Model credentials is not initialized.")
                 else:
                     raise last_exception
 
@@ -413,10 +424,12 @@ class ModelManager:
         :param model_type: model type
         :return:
         """
-        default_model_entity = self._provider_manager.get_default_model(tenant_id=tenant_id, model_type=model_type)
+        default_model_entity = self._provider_manager.get_default_model(
+            tenant_id=tenant_id, model_type=model_type)
 
         if not default_model_entity:
-            raise ProviderTokenNotInitError(f"Default model not found for {model_type}")
+            raise ProviderTokenNotInitError(
+                f"Default model not found for {model_type}")
 
         return self.get_model_instance(
             tenant_id=tenant_id,
@@ -451,7 +464,8 @@ class LBModelManager:
         self._model = model
         self._load_balancing_configs = load_balancing_configs
 
-        for load_balancing_config in self._load_balancing_configs[:]:  # Iterate over a shallow copy of the list
+        # Iterate over a shallow copy of the list
+        for load_balancing_config in self._load_balancing_configs[:]:
             if load_balancing_config.name == "__inherit__":
                 if not managed_credentials:
                     # remove __inherit__ if managed credentials is not provided
@@ -500,8 +514,10 @@ class LBModelManager:
             if dify_config.DEBUG:
                 logger.info(
                     f"Model LB\nid: {config.id}\nname:{config.name}\n"
-                    f"tenant_id: {self._tenant_id}\nprovider: {self._provider}\n"
-                    f"model_type: {self._model_type.value}\nmodel: {self._model}"
+                    f"tenant_id: {self._tenant_id}\nprovider: {
+                        self._provider}\n"
+                    f"model_type: {self._model_type.value}\nmodel: {
+                        self._model}"
                 )
 
             return config
